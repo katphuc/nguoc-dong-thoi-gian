@@ -2,7 +2,7 @@
   height: 60px;
 }
 .main-content {
-  padding: 20px;
+  /* padding: 20px; */
   padding-top: 100px;
   width: calc(100% - 310px); /* Phần còn lại trừ đi chiều rộng của Sidebar */
 }
