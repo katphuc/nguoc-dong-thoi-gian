@@ -12,16 +12,24 @@ export const fontFace = css`
   }
 `;
 
-export const HomePageSection = styled.div``;
+export const HomePageSection = styled.div`
+  @media (max-width: 768px) {
+    width: 60vh;
+  }
+`;
 export const Header = styled.h2`
+@media (max-width: 768px) {
+    font-size:30px;
+  }
 ${fontFace}
 font-family: 'DFVN Guardilostra', sans-serif;
   color: black;
   font-size: 40px;
-  position: relative;
   margin: 0;
   text-align: center;
+  user-select: none;
   }
+   
 `;
 export const ButtonSection = styled.div`
   display: flex;
@@ -47,6 +55,9 @@ export const HistoryButton = styled.button`
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
+  @media (max-width: 768px) {
+    width: 40vh;
+  }
 `;
 export const QuizButton = styled.button`
   border: 0px;
@@ -63,10 +74,13 @@ export const QuizButton = styled.button`
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
+  @media (max-width: 768px) {
+    width: 40vh;
+  }
 `;
 export const ArtButton = styled.button`
-  position: relative;
   border: 0px;
+  position: relative;
   background: #3a2c1c;
   border-radius: 20px;
   color: rgba(255, 255, 255, 0.6);
@@ -77,6 +91,7 @@ export const ArtButton = styled.button`
   opacity: 0.7;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 
   &:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
@@ -91,6 +106,9 @@ export const ArtButton = styled.button`
     transform: translate(-50%, -50%);
     font-size: 40px;
     color: white;
+  }
+  @media (max-width: 768px) {
+    width: 40vh;
   }
 `;
 export const ImgSection = styled.div`

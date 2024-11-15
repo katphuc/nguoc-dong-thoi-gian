@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   SideBarSection,
@@ -34,17 +34,31 @@ import {
   Slider,
   VolumeValue,
   Label,
+  StyledBookIcon,
+  CollectionDetails,
+  ComparisonContainer,
+  Column,
+  ColumnHeader,
+  ListItem,
+  ToggleButton,
+  HideIcon,
+  ShowIcon,
 } from "./style";
 import avt from "../assets/img/avt.png";
 import smallCoin from "../assets/img/small-coin.png";
 
 function SideBar() {
   const [showPopup, setShowPopup] = useState(false);
+  const [showVipPopup, setShowVipPopup] = useState(false);
   const [activeTab, setActiveTab] = useState("tab1");
   const [volume, setVolume] = useState(50);
+  const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
+  };
+  const toggleVipPopup = () => {
+    setShowVipPopup(!showVipPopup);
   };
   const changeTab = (tab) => {
     setActiveTab(tab);
@@ -52,9 +66,30 @@ function SideBar() {
   const handleVolumeChange = (e) => {
     setVolume(e.target.value);
   };
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsOpen(false); // Automatically hide sidebar when screen is small
+      } else {
+        setIsOpen(true); // Show sidebar when screen is large
+      }
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Run on initial render to check the screen size
+    handleResize();
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
-      <SideBarSection>
+      <SideBarSection isOpen={isOpen}>
         <UserSection>
           <UserDetails>
             <UserName>Thiên Phúc</UserName>
@@ -63,7 +98,7 @@ function SideBar() {
           <UserAvt src={avt} alt="avt"></UserAvt>
         </UserSection>
         <UserTiers>
-          <Tiers type="primary" size="large">
+          <Tiers type="primary" size="large" onClick={toggleVipPopup}>
             VIP
           </Tiers>
           <CoinNumber>1000</CoinNumber>
@@ -83,6 +118,13 @@ function SideBar() {
               Thông Tin Cá Nhân
               <StyledUserIcon></StyledUserIcon>
             </ProfileDetails>
+          </StyledLi>
+          <Separator />
+          <StyledLi>
+            <CollectionDetails to="/bo-suu-tap">
+              Bộ Sưu Tập
+              <StyledBookIcon></StyledBookIcon>
+            </CollectionDetails>
           </StyledLi>
           <StyledLi>
             <Store to="/cua-hang">
@@ -106,10 +148,14 @@ function SideBar() {
           </Logout>
         </StyledUl>
       </SideBarSection>
+      {/* Nút Toggle Sidebar trên màn hình nhỏ */}
+      <ToggleButton onClick={toggleSidebar}>
+        {isOpen ? <HideIcon /> : <ShowIcon />}
+      </ToggleButton>
       {/* Popup */}
       {showPopup && (
-        <PopupOverlay>
-          <PopupContent>
+        <PopupOverlay onClick={togglePopup}>
+          <PopupContent onClick={(e) => e.stopPropagation()}>
             <HeaderPopup>Cài Đặt</HeaderPopup>
             <div style={{ display: "flex" }}>
               {/* Tabs (dọc) */}
@@ -162,6 +208,35 @@ function SideBar() {
               </div>
             </div>
             <CloseButton onClick={togglePopup}>Đóng</CloseButton>
+          </PopupContent>
+        </PopupOverlay>
+      )}
+      {showVipPopup && (
+        <PopupOverlay onClick={toggleVipPopup}>
+          <PopupContent onClick={(e) => e.stopPropagation()}>
+            <HeaderPopup>Hội Viên</HeaderPopup>
+            <ComparisonContainer>
+              {/* Cột Thành Viên Thường */}
+              <Column>
+                <ColumnHeader>Thành Viên Thường</ColumnHeader>
+                <ul>
+                  <ListItem>Truy cập nội dung cơ bản</ListItem>
+                  <ListItem>Không tích lũy điểm thưởng</ListItem>
+                  <ListItem>Hỗ trợ trong giờ làm việc</ListItem>
+                </ul>
+              </Column>
+              {/* Cột Thành Viên VIP */}
+              <Column>
+                <ColumnHeader>Thành Viên VIP</ColumnHeader>
+                <ul>
+                  <ListItem>Truy cập toàn bộ nội dung</ListItem>
+                  <ListItem>Tích lũy điểm thưởng nhanh hơn</ListItem>
+                  <ListItem>Hỗ trợ ưu tiên 24/7</ListItem>
+                  <ListItem>Ưu đãi giảm giá khi mua sắm</ListItem>
+                </ul>
+              </Column>
+            </ComparisonContainer>
+            <CloseButton onClick={toggleVipPopup}>Đóng</CloseButton>
           </PopupContent>
         </PopupOverlay>
       )}

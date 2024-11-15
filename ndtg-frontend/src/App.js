@@ -8,6 +8,7 @@ import QuizPage from "./pages/QuizPage/QuizPage";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import Store from "./pages/Store/Store";
 import ArtPage from "./pages/ArtPage/ArtPage";
+import Collection from "./pages/Collection/Collection";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/hoi-va-dap" element={<QuizPage />} />
             <Route path="/thong-tin-ca-nhan" element={<UserProfile />} />
             <Route path="/cua-hang" element={<Store />} />
+            <Route path="/bo-suu-tap" element={<Collection />} />
             <Route path="/nghe-thuat-viet-nam" element={<ArtPage />} />
           </Routes>
         </div>

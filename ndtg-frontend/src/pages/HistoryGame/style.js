@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const HistoryGameSection = styled.div``;
+export const HistoryGameSection = styled.div`
+  @media (max-width: 768px) {
+    width: 59vh;
+  }
+`;
 export const Header = styled.h2`
   color: black;
   font-weight: bold;
@@ -8,6 +12,7 @@ export const Header = styled.h2`
   position: relative;
   margin: 0;
   text-align: center;
+  user-select: none;
   &:after {
     content: "";
     position: absolute;
@@ -17,6 +22,9 @@ export const Header = styled.h2`
     width: 50%;
     height: 2px;
     background-color: grey;
+  }
+  @media (max-width: 768px) {
+    font-size: 30px;
   }
 `;
 export const PeriodsSection = styled.div`
@@ -42,6 +50,9 @@ export const PrehistoricPeriods = styled.button`
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
+  @media (max-width: 768px) {
+    width: 50vh;
+  }
 `;
 export const VanLangAuLacPeriods = styled.button`
   border: 0px;
@@ -58,6 +69,9 @@ export const VanLangAuLacPeriods = styled.button`
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
+  @media (max-width: 768px) {
+    width: 50vh;
+  }
 `;
 export const NorthernDominationPeriod = styled.button`
   border: 0px;
@@ -73,5 +87,8 @@ export const NorthernDominationPeriod = styled.button`
   &:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
       0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+  @media (max-width: 768px) {
+    width: 50vh;
   }
 `;
